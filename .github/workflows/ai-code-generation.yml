@@ -21,7 +21,7 @@ jobs:
 
       # Step 3: Install Gemini CLI
       - name: Install Gemini CLI
-        run: npm install -g @google/generative-ai-cli
+        run: npm install -g @google/gemini-cli
 
       # Step 4: Run Gemini CLI to generate code changes
       - name: Run Gemini Code Generation
