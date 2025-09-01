@@ -17,17 +17,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '20'
 
       # Step 3: Install Gemini CLI
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
 
-      # Step 4: Run Gemini CLI to generate code changes
+      # Step 4: Dynamically generate prompt and run Gemini CLI to generate code changes
       - name: Run Gemini Code Generation
         run: |
-          # The prompt.txt file should contain your task instructions
-          gemini prompt -m "gemini-2.0-pro" --file prompt.txt > ai_patch.diff
+          # Dynamically generate the prompt based on PR title and description
+          TASK_DESCRIPTION="Generate code to add a search bar with debounce functionality and keyboard navigation to the homepage. Add unit tests for the search feature. Ensure it doesn’t affect any other functionality."
+          
+          # Run the Gemini CLI with the task description
+          gemini prompt -m "gemini-2.0-pro" --text "$TASK_DESCRIPTION" > ai_patch.diff
 
       # Step 5: Apply AI-generated patch (diff) to the PR branch
       - name: Apply AI Patch
