@@ -1,0 +1,50 @@
+name: AI Code Generator and PR Updates
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+jobs:
+  ai-code-generation:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the PR branch
+      - name: Checkout PR
+        uses: actions/checkout@v2
+
+      # Step 2: Setup Node.js environment for AI CLI
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # Step 3: Install Gemini CLI
+      - name: Install Gemini CLI
+        run: npm install -g @google/generative-ai-cli
+
+      # Step 4: Run Gemini CLI to generate code changes
+      - name: Run Gemini Code Generation
+        run: |
+          # The prompt.txt file should contain your task instructions
+          gemini prompt -m "gemini-2.0-pro" --file prompt.txt > ai_patch.diff
+
+      # Step 5: Apply AI-generated patch (diff) to the PR branch
+      - name: Apply AI Patch
+        run: |
+          git apply ai_patch.diff
+          git add -A
+          git commit -m "chore(auto): Apply AI-generated changes"
+          git push
+
+      # Step 6: Optionally, run tests or linters
+      - name: Run Tests and Lint
+        run: |
+          npm install
+          npm run lint
+          npm test --ci
+
+      # Step 7: Optionally, auto-merge the PR (if configured)
+      - name: Auto-merge PR if checks pass
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --merge
