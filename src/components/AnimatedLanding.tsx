@@ -212,11 +212,15 @@ const AnimatedLanding: React.FC = () => {
             </motion.button>
 
             <motion.button
+              onClick={() => {
+                window.history.pushState(null, '', '/search');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="px-8 py-4 rounded-full font-semibold text-lg border-2 border-white/20 backdrop-blur-sm hover:bg-white/10 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Watch Demo
+              Search People
             </motion.button>
           </motion.div>
 
