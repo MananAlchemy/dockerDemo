@@ -1,0 +1,25 @@
+name: Claude Code PR Automation
+on:
+  pull_request:
+    types: [opened, synchronize] # Trigger on PR creation or updates
+
+jobs:
+  claude-task:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allow Claude to read/write code
+      pull-requests: write # Allow Claude to create/update PRs
+      issues: read # Allow reading issue/PR descriptions
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch full history for context
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Analyze the pull request description and implement the task described. Follow the coding standards in CLAUDE.md if present. Create a new pull request with the changes if necessary.
+          allowed_tools: "Bash(git:*),View,Edit,Write,Grep,Glob,mcp__github__create_pull_request"
