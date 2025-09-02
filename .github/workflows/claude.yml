@@ -7,6 +7,7 @@ jobs:
   claude-task:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write # Required for OIDC token fetch
       contents: write # Allow Claude to read/write code
       pull-requests: write # Allow Claude to create/update PRs
       issues: read # Allow reading issue/PR descriptions
