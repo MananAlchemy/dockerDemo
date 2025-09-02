@@ -17,7 +17,7 @@ const About: React.FC = () => {
             We are a team of passionate marketers dedicated to helping businesses succeed in the digital world. Our data-driven approach ensures that we deliver measurable results and a high return on investment.
           </p>
           <p>
-            Founded in 2024, our mission is toprovide innovative marketing solutions that drive growth and create lasting value for our clients.
+            Founded in 2024, our mission is top rovide innovative marketing solutions that drive growth and create lasting value for our clients.
           </p>
         </motion.div>
         <motion.div
