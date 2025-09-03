@@ -222,6 +222,18 @@ const AnimatedLanding: React.FC = () => {
             >
               Search People
             </motion.button>
+
+            <motion.button
+              onClick={() => {
+                window.history.pushState(null, '', '/todo');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              className="px-8 py-4 rounded-full font-semibold text-lg border-2 border-cyan-400/20 backdrop-blur-sm hover:bg-cyan-400/10 transition-colors text-cyan-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Todo List
+            </motion.button>
           </motion.div>
 
           {/* Scroll Indicator */}
