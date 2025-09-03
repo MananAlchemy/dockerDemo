@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AnimatedLanding from './components/AnimatedLanding';
 import Search from './components/Search';
+import Todo from './components/Todo';
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -19,6 +20,8 @@ function App() {
     switch (currentPath) {
       case '/search':
         return <Search />;
+      case '/todo':
+        return <Todo />;
       case '/':
       default:
         return <AnimatedLanding />;
