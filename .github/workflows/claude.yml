@@ -24,3 +24,4 @@ jobs:
           prompt: |
             Analyze the pull request description and implement the task described. Follow the coding standards in CLAUDE.md if present. Create a new pull request with the changes if necessary.
           allowed_tools: "Bash(git:*),View,Edit,Write,Grep,Glob,mcp__github__create_pull_request"
+          allowed_bots: "*"
